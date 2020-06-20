@@ -1,0 +1,4 @@
+D:\LearningC#\LinqExtensionMethods\LinqExtensionMethodsTests\obj\Debug\netcoreapp3.1\LinqExtensionMethodsTests.csprojAssemblyReference.cache
+D:\LearningC#\LinqExtensionMethods\LinqExtensionMethodsTests\obj\Debug\netcoreapp3.1\LinqExtensionMethodsTests.AssemblyInfoInputs.cache
+D:\LearningC#\LinqExtensionMethods\LinqExtensionMethodsTests\obj\Debug\netcoreapp3.1\LinqExtensionMethodsTests.AssemblyInfo.cs
+D:\LearningC#\LinqExtensionMethods\LinqExtensionMethodsTests\obj\Debug\netcoreapp3.1\LinqExtensionMethodsTests.csproj.CoreCompileInputs.cache

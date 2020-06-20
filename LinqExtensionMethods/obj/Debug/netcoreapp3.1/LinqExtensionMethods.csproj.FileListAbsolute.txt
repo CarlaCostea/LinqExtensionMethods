@@ -1,0 +1,13 @@
+D:\LearningC#\LinqExtensionMethods\LinqExtensionMethods\bin\Debug\netcoreapp3.1\LinqExtensionMethods.exe
+D:\LearningC#\LinqExtensionMethods\LinqExtensionMethods\obj\Debug\netcoreapp3.1\LinqExtensionMethods.AssemblyInfoInputs.cache
+D:\LearningC#\LinqExtensionMethods\LinqExtensionMethods\obj\Debug\netcoreapp3.1\LinqExtensionMethods.AssemblyInfo.cs
+D:\LearningC#\LinqExtensionMethods\LinqExtensionMethods\bin\Debug\netcoreapp3.1\LinqExtensionMethods.deps.json
+D:\LearningC#\LinqExtensionMethods\LinqExtensionMethods\bin\Debug\netcoreapp3.1\LinqExtensionMethods.runtimeconfig.json
+D:\LearningC#\LinqExtensionMethods\LinqExtensionMethods\bin\Debug\netcoreapp3.1\LinqExtensionMethods.runtimeconfig.dev.json
+D:\LearningC#\LinqExtensionMethods\LinqExtensionMethods\bin\Debug\netcoreapp3.1\LinqExtensionMethods.dll
+D:\LearningC#\LinqExtensionMethods\LinqExtensionMethods\bin\Debug\netcoreapp3.1\LinqExtensionMethods.pdb
+D:\LearningC#\LinqExtensionMethods\LinqExtensionMethods\obj\Debug\netcoreapp3.1\LinqExtensionMethods.csproj.CoreCompileInputs.cache
+D:\LearningC#\LinqExtensionMethods\LinqExtensionMethods\obj\Debug\netcoreapp3.1\LinqExtensionMethods.dll
+D:\LearningC#\LinqExtensionMethods\LinqExtensionMethods\obj\Debug\netcoreapp3.1\LinqExtensionMethods.pdb
+D:\LearningC#\LinqExtensionMethods\LinqExtensionMethods\obj\Debug\netcoreapp3.1\LinqExtensionMethods.genruntimeconfig.cache
+D:\LearningC#\LinqExtensionMethods\LinqExtensionMethods\obj\Debug\netcoreapp3.1\LinqExtensionMethods.csprojAssemblyReference.cache
