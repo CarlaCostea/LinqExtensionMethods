@@ -4,9 +4,9 @@ using System.Text;
 
 namespace LinqExtensionMethods
 {
-    public class IntContains
+    public class GenericContains
     {
-        public static bool IContains(int[] elements, IEqualityComparer equalityComparer)
+        public static bool GContains<T>(IEnumerable<T> elements, IGenericEqualityComparer<T> equalityComparer)
         {
             if (elements == null || equalityComparer == null)
             {

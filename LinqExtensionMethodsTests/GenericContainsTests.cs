@@ -12,9 +12,9 @@ namespace LinqExtensionMethodsTests_manual
         public void IfCollectionContainsValueWeShouldReturnTrue()
         {
             int[] collection = new int[] { 1, 2, 3, 4 };
-            int value = 1;
+            var value = 1;
 
-            Assert.True(IntContains.GContains(collection, new ExactEqualityComparer(value)));
+            Assert.True(GenericContains.GContains(collection, new GenericExactEqualityComparer<int>(value)));
         }
 
         [Fact]
@@ -23,39 +23,25 @@ namespace LinqExtensionMethodsTests_manual
             int[] collection = new int[] { 1, 2, 3, 4 };
             int value = 0;
 
-            Assert.False(IntContains.GContains(collection, new ExactEqualityComparer(value)));
+            Assert.False(GenericContains.GContains(collection, new GenericExactEqualityComparer<int>(value)));
         }
 
         [Fact]
-        public void IfCollectionContainsOddNumbersWeShouldReturnTrue()
+        public void IfCollectionContainsStringValueWeShouldReturnTrue()
         {
-            int[] collection = new int[] { 1, 2, 3, 4 };
+            string[] collection = new string[] { "hello", "world"};
+            var value = "hello";
 
-            Assert.True(IntContains.GContains(collection, new EvenEqualityComparer()));
+            Assert.True(GenericContains.GContains(collection, new GenericExactEqualityComparer<string>(value)));
         }
 
         [Fact]
-        public void IfCollectionDoNotContainsOddNumbersWeShouldReturnFalse()
+        public void IfCollectionDoNotContainsStringValueWeShouldReturnFalse()
         {
-            int[] collection = new int[] { 1, 5, 3, 7 };
+            string[] collection = new string[] { "hello", "world"};
+            string value = "";
 
-            Assert.False(IntContains.GContains(collection, new EvenEqualityComparer()));
-        }
-
-        [Fact]
-        public void IfCollectionContainsPrimeNumbersWeShouldReturnTrue()
-        {
-            int[] collection = new int[] { 2, 3, 5, 11 };
-
-            Assert.True(IntContains.GContains(collection, new PrimeEqualityComparer()));
-        }
-
-        [Fact]
-        public void IfCollectionDoNotContainsPrimeNumbersWeShouldReturnFalse()
-        {
-            int[] collection = new int[] { 1, 6, 12, 9 };
-
-            Assert.False(IntContains.GContains(collection, new PrimeEqualityComparer()));
+            Assert.False(GenericContains.GContains(collection, new GenericExactEqualityComparer<string>(value)));
         }
     }
 }
