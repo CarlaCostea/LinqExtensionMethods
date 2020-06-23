@@ -93,5 +93,33 @@ namespace LinqExtensionMethodsTests_manual
 
             Assert.Equal(new[] { 1, 4, 9, 16 }, selector);
         }
+
+        [Fact]
+        public void SelectMethodShouldThrowAnErrorWhenSourceIsNull()
+        {
+            int[] source = null;
+
+            Assert.Throws<ArgumentNullException>(() => source.Select(n => n * n));
+        }
+
+        [Fact]
+        public void SelectMethodShouldThrowAnErrorWhenSelectorIsNull()
+        {
+            var source = new int[] { 1, 2, 3, 4 };
+
+            var selector = source.Select<int,int>(null);
+
+            Assert.Throws<ArgumentNullException>(() => source.Select(n => n * n));
+        }
+
+        [Fact]
+        public void SelectManyMethodShouldReturnAnIEnumerableTWhoseElementsAreTheResultOfInvokingTheOneToManyTransformFunctionOnEachElementOfSource()
+        {
+            List<string> nameList = new List<string>() { "Carla", "Cris" };
+            IEnumerable<char> methodSyntax = nameList.SelectMany(x => x);
+
+            Assert.Equal(new[] { 'C', 'a', 'r', 'l', 'a', 'C', 'r', 'i', 's' }, methodSyntax);
+
+    }
     }
 }

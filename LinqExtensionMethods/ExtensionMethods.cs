@@ -79,5 +79,26 @@ namespace LinqExtensionMethods
                 yield return selector(element);
             }
         }
+
+        public static IEnumerable<TResult> SelectMany<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, IEnumerable<TResult>> selector)
+        {
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            if (selector == null)
+            {
+                throw new ArgumentNullException(nameof(selector));
+            }
+
+            foreach (var element in source)
+            {
+                foreach (var resultElement in selector(element))
+                {
+                    yield return resultElement;
+                }
+            }
+        }
     }
 }
