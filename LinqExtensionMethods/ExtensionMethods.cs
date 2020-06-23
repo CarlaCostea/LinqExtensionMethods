@@ -149,5 +149,48 @@ namespace LinqExtensionMethods
 
             return dictionary;
         }
+
+        public static IEnumerable<TResult> Zip<TFirst, TSecond, TResult>(this IEnumerable<TFirst> first, IEnumerable<TSecond> second, Func<TFirst, TSecond, TResult> resultSelector)
+        {
+            if (first == null)
+            {
+                throw new ArgumentNullException(nameof(first));
+            }
+
+            if (second == null)
+            {
+                throw new ArgumentNullException(nameof(second));
+            }
+
+            using (var iteratorA = first.GetEnumerator())
+            using (var iteratorB = second.GetEnumerator())
+            {
+                while (iteratorA.MoveNext() && iteratorB.MoveNext())
+                {
+                    yield return resultSelector(iteratorA.Current, iteratorB.Current);
+                }
+            }
+        }
+
+        public static TAccumulate Aggregate<TSource, TAccumulate>(this IEnumerable<TSource> source, TAccumulate seed, Func<TAccumulate, TSource, TAccumulate> func)
+        {
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            if (func == null)
+            {
+                throw new ArgumentNullException(nameof(func));
+            }
+
+            TAccumulate result = seed;
+            foreach (TSource element in source)
+            {
+                result = func(result, element);
+            }
+
+            return result;
+        }
     }
 }

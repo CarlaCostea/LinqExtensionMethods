@@ -99,7 +99,11 @@ namespace LinqExtensionMethodsTests_manual
         {
             int[] source = null;
 
-            Assert.Throws<ArgumentNullException>(() => source.Select(n => n * n));
+            var selector = source.Select<int, int>(n => n * n);
+
+            var enumerator = selector.GetEnumerator();
+
+            Assert.Throws<ArgumentNullException>(() => enumerator.MoveNext());
         }
 
         [Fact]
@@ -109,7 +113,9 @@ namespace LinqExtensionMethodsTests_manual
 
             var selector = source.Select<int,int>(null);
 
-            Assert.Throws<ArgumentNullException>(() => source.Select(n => n * n));
+            var enumerator = selector.GetEnumerator();
+
+            Assert.Throws<ArgumentNullException>(() => enumerator.MoveNext());
         }
 
         [Fact]
@@ -136,15 +142,18 @@ namespace LinqExtensionMethodsTests_manual
         {
             int[] source = null;
 
-            Assert.Throws<ArgumentNullException>(() => source.Where(n => n % 2 == 0));
+            var enumerator = source.Where(n => n % 2 == 0).GetEnumerator();
+
+            Assert.Throws<ArgumentNullException>(() => enumerator.MoveNext());
         }
 
         [Fact]
         public void WhereMethodShouldThrowAnErrorWhenPredicateIsNull()
         {
             var source = new int[] { 1, 2, 3, 4, 5, 6 };
+            var enumerator = source.Where(null).GetEnumerator();
 
-            Assert.Throws<ArgumentNullException>(() => source.Where(null));
+            Assert.Throws<ArgumentNullException>(() => enumerator.MoveNext());
         }
 
         [Fact]
@@ -183,6 +192,70 @@ namespace LinqExtensionMethodsTests_manual
             string[] source = new string[] { "Car", "Bus", "Bicycle" };
 
             Assert.Throws<ArgumentNullException>(() => source.ToDictionary<string, int, bool>(item => item.GetHashCode(), null));
+        }
+
+        [Fact]
+        public void ToDictionaryMethodShouldThrowAnErrorWhenkeySelectorProducesDuplicateKeysForTwoElements()
+        {
+            string[] source = new string[] { "Car", "Bus", "Bicycle" };
+
+            Assert.Throws<ArgumentException>(() => source.ToDictionary<string, int, bool>(item => 0, item => true));
+        }
+        [Fact]
+        public void ZipMethodShouldReturnAnIEnumerableTthatContainsMergedElementsOfTwoInputSequences()
+        {
+            int[] integers1 = new int[] { 1, 2, 3, 4, 5 };
+            int[] integers2 = new int[] { 10, 20};
+            var sum = integers1.Zip(integers2, (i, j) => i + j);
+
+            Assert.Equal(new[] { 11, 22 }, sum);
+        }
+
+        [Fact]
+        public void ZipMethodShouldThrowAnErrorWhenFirstSourceIsNull()
+        {
+            int[] integers1 = null;
+            int[] integers2 = new int[] { 10, 20 };
+            var sum = integers1.Zip(integers2, (i, j) => i + j);
+            var enumerator = sum.GetEnumerator();
+
+            Assert.Throws<ArgumentNullException>(() => enumerator.MoveNext());
+        }
+
+        [Fact]
+        public void ZipMethodShouldThrowAnErrorWhenSecondSourceIsNull()
+        {
+            int[] integers1 = new int[] { 1, 2, 3, 4, 5 };
+            int[] integers2 = null;
+            var sum = integers1.Zip(integers2, (i, j) => i + j);
+            var enumerator = sum.GetEnumerator();
+
+            Assert.Throws<ArgumentNullException>(() => enumerator.MoveNext());
+        }
+
+        [Fact]
+        public void AggregateMethodShouldReturnAnAccumulator()
+        {
+            var numbers = new List<int> { 6, 2, 8, 3 };
+            int sum = numbers.Aggregate(0, func: (result, item) => result + item);
+
+            Assert.Equal(19, sum);
+        }
+
+        [Fact]
+        public void AggregateMethodShouldThrowAnErrorWhenSourceIsNull()
+        {
+            int[] numbers = null;
+
+            Assert.Throws<ArgumentNullException>(() => numbers.Aggregate(0, func: (result, item) => result + item));
+        }
+
+        [Fact]
+        public void AggregateMethodShouldThrowAnErrorWhenFuncIsNull()
+        {
+            var numbers = new List<int> { 6, 2, 8, 3 };
+
+            Assert.Throws<ArgumentNullException>(() => numbers.Aggregate(0, func: null));
         }
     }
 }
