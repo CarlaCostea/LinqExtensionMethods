@@ -119,7 +119,70 @@ namespace LinqExtensionMethodsTests_manual
             IEnumerable<char> methodSyntax = nameList.SelectMany(x => x);
 
             Assert.Equal(new[] { 'C', 'a', 'r', 'l', 'a', 'C', 'r', 'i', 's' }, methodSyntax);
+        }
 
-    }
+        [Fact]
+        public void WhereMethodShouldReturnAnIEnumerableTThatContainsElementsFromTheSourceThatSatisfyTheCondition()
+        {
+            var source = new int[] { 1, 2, 3, 4, 5, 6 };
+
+            var result = source.Where(n => n % 2 == 0);
+
+            Assert.Equal(new[] { 2, 4, 6 }, result);
+        }
+
+        [Fact]
+        public void WhereMethodShouldThrowAnErrorWhenSourceIsNull()
+        {
+            int[] source = null;
+
+            Assert.Throws<ArgumentNullException>(() => source.Where(n => n % 2 == 0));
+        }
+
+        [Fact]
+        public void WhereMethodShouldThrowAnErrorWhenPredicateIsNull()
+        {
+            var source = new int[] { 1, 2, 3, 4, 5, 6 };
+
+            Assert.Throws<ArgumentNullException>(() => source.Where(null));
+        }
+
+        [Fact]
+        public void ToDictionaryMethodShouldReturnADictionaryTKeyTValueThatContainsValuesOfTypeTElementSelectedFromTheInputSource()
+        {
+            string[] str = new string[] { "Car", "Bus", "Bicycle" };
+            var result = new Dictionary<string, bool>();
+
+            result = str.ToDictionary(item => item, item => true);
+
+            var enumerator = result.GetEnumerator();
+            enumerator.MoveNext();
+
+            Assert.Equal(new KeyValuePair<string,bool>("Car", true), enumerator.Current);
+        }
+
+        [Fact]
+        public void ToDictionaryMethodShouldThrowAnErrorWhenSourceIsNull()
+        {
+            string[] source = null;
+
+            Assert.Throws<ArgumentNullException>(() => source.ToDictionary(item => item, item => true));
+        }
+
+        [Fact]
+        public void ToDictionaryMethodShouldThrowAnErrorWhenKeySelectorIsNull()
+        {
+            string[] source = new string[] { "Car", "Bus", "Bicycle" };
+
+            Assert.Throws<ArgumentNullException>(() => source.ToDictionary<string, int, bool>(null, item => true));
+        }
+
+        [Fact]
+        public void ToDictionaryMethodShouldThrowAnErrorWhenElementSelectorIsNull()
+        {
+            string[] source = new string[] { "Car", "Bus", "Bicycle" };
+
+            Assert.Throws<ArgumentNullException>(() => source.ToDictionary<string, int, bool>(item => item.GetHashCode(), null));
+        }
     }
 }
