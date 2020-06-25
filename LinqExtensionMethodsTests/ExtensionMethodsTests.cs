@@ -257,5 +257,48 @@ namespace LinqExtensionMethodsTests_manual
 
             Assert.Throws<ArgumentNullException>(() => numbers.Aggregate(0, func: null));
         }
+
+        [Fact]
+        public void JoinMethodShouldJoinTwoSequencesBasedOnMatchingKeys()
+        {
+            IList<string> strList1 = new List<string>() {"One", "Two", "Three", "Four"};
+
+            IList<string> strList2 = new List<string>() { "One", "Two", "Five", "Six" };
+
+            var innerJoin = strList1.Join(strList2,
+                                  str1 => str1,
+                                  str2 => str2,
+                                  (str1, str2) => str1);
+
+            IList<string> result = new List<string>() { "One", "Two"};
+
+            Assert.Equal(result, innerJoin);
+        }
+
+        [Fact]
+        public void DistinctMethodShouldReturnDistinctElementsFromASequenceByUsingASpecifiedIEqualityComparerTtoCompareValues()
+        {
+            IList<string> strList1 = new List<string>() { "One", "Two", "Three", "Four", "One", "Two" };
+
+            var distinct = strList1.Distinct(EqualityComparer<string>.Default);
+
+            IList<string> result = new List<string>() { "One", "Two", "Three", "Four" };
+
+            Assert.Equal(result, distinct);
+        }
+
+        [Fact]
+        public void UncionMethodShouldReturnTheSetUnionOfTwoSequencesByUsingASpecifiedIEqualityComparerT()
+        {
+            IList<string> strList1 = new List<string>() { "One", "Two", "Three", "Four", "One", "Two" };
+
+            IList<string> strList2 = new List<string>() { "One", "Two", "Five", "Six" };
+
+            var union = strList1.Union(strList2, EqualityComparer<string>.Default);
+
+            IList<string> result = new List<string>() { "One", "Two", "Three", "Four", "Five", "Six" };
+
+            Assert.Equal(result, union);
+        }
     }
 }

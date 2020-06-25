@@ -192,5 +192,77 @@ namespace LinqExtensionMethods
 
             return result;
         }
+
+        public static IEnumerable<TResult> Join<TOuter, TInner, TKey, TResult>(
+            this IEnumerable<TOuter> outer, IEnumerable<TInner> inner, Func<TOuter, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector, Func<TOuter, TInner, TResult> resultSelector)
+        {
+            if (outer == null)
+            {
+                throw new ArgumentNullException(nameof(outer));
+            }
+
+            if (inner == null)
+            {
+                throw new ArgumentNullException(nameof(inner));
+            }
+
+            foreach (var outerElement in outer)
+            {
+                foreach (var innerElement in inner)
+                {
+                    if (innerKeySelector(innerElement).Equals(outerKeySelector(outerElement)))
+                    {
+                        yield return resultSelector(outerElement, innerElement);
+                    }
+                }
+            }
+        }
+
+        public static IEnumerable<TSource> Distinct<TSource>(this IEnumerable<TSource> source, IEqualityComparer<TSource> comparer)
+        {
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            HashSet<TSource> seenElements = new HashSet<TSource>(comparer);
+            foreach (TSource item in source)
+            {
+                if (seenElements.Add(item))
+                {
+                    yield return item;
+                }
+            }
+        }
+
+        public static IEnumerable<TSource> Union<TSource>(this IEnumerable<TSource> first, IEnumerable<TSource> second, IEqualityComparer<TSource> comparer)
+        {
+            if (first == null)
+            {
+                throw new ArgumentNullException(nameof(first));
+            }
+
+            if (second == null)
+            {
+                throw new ArgumentNullException(nameof(second));
+            }
+
+            HashSet<TSource> seenElements = new HashSet<TSource>(comparer);
+            foreach (TSource item in first)
+            {
+                if (seenElements.Add(item))
+                {
+                    yield return item;
+                }
+            }
+
+            foreach (TSource item in second)
+            {
+                if (seenElements.Add(item))
+                {
+                    yield return item;
+                }
+            }
+        }
     }
 }
