@@ -300,5 +300,47 @@ namespace LinqExtensionMethodsTests_manual
 
             Assert.Equal(result, union);
         }
+
+        [Fact]
+        public void IntersectMethodShouldReturnTheSetIntersectionOfTwoSequencesByUsingASpecifiedIEqualityComparerT()
+        {
+            IList<string> strList1 = new List<string>() { "One", "Two", "Three", "Four", "One", "Two", "Five" };
+
+            IList<string> strList2 = new List<string>() { "One", "Two", "Five", "Six" };
+
+            var intersect = strList1.Intersect(strList2, EqualityComparer<string>.Default);
+
+            IList<string> result = new List<string>() { "One", "Two", "Five"};
+
+            Assert.Equal(result, intersect);
+        }
+
+        [Fact]
+        public void ExceptMethodShouldReturnTheSetDifferenceOfTwoSequencesByUsingASpecifiedIEqualityComparerT()
+        {
+            IList<string> strList1 = new List<string>() { "One", "Two", "Three", "Four", "One", "Two", "Five" };
+
+            IList<string> strList2 = new List<string>() { "One", "Two", "Six" };
+
+            var except = strList1.Except(strList2, EqualityComparer<string>.Default);
+
+            IList<string> result = new List<string>() { "Three", "Four", "Five" };
+
+            Assert.Equal(result, except);
+        }
+
+        [Fact]
+        public void GroupByMethodShouldReturnACollectionOfElementsOfTypeTResultWhereEachElementRepresentsAProjectionOverAGroupAndItsKey()
+        {
+            IList<string> strList1 = new List<string>() { "One", "Two", "Three", "Four", "One", "Two", "Five" };
+
+            IList<string> strList2 = new List<string>() { "One", "Two", "Six" };
+
+            var except = strList1.Except(strList2, EqualityComparer<string>.Default);
+
+            IList<string> result = new List<string>() { "Three", "Four", "Five" };
+
+            Assert.Equal(result, except);
+        }
     }
 }

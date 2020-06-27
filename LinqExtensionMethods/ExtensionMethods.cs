@@ -264,5 +264,85 @@ namespace LinqExtensionMethods
                 }
             }
         }
+
+        public static IEnumerable<TSource> Intersect<TSource>(this IEnumerable<TSource> first, IEnumerable<TSource> second, IEqualityComparer<TSource> comparer)
+        {
+            if (first == null)
+            {
+                throw new ArgumentNullException(nameof(first));
+            }
+
+            if (second == null)
+            {
+                throw new ArgumentNullException(nameof(second));
+            }
+
+            HashSet<TSource> potentialElements = new HashSet<TSource>(second, comparer);
+            foreach (TSource item in first)
+            {
+                if (potentialElements.Remove(item))
+                {
+                    yield return item;
+                }
+            }
+        }
+
+        public static IEnumerable<TSource> Except<TSource>(this IEnumerable<TSource> first, IEnumerable<TSource> second, IEqualityComparer<TSource> comparer)
+        {
+            if (first == null)
+            {
+                throw new ArgumentNullException(nameof(first));
+            }
+
+            if (second == null)
+            {
+                throw new ArgumentNullException(nameof(second));
+            }
+
+            HashSet<TSource> bannedElements = new HashSet<TSource>(second, comparer);
+            foreach (TSource item in first)
+            {
+                if (bannedElements.Add(item))
+                {
+                    yield return item;
+                }
+            }
+        }
+
+        public static IEnumerable<TResult> GroupBy<TSource, TKey, TElement, TResult>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector,
+            Func<TSource, TElement> elementSelector,
+            Func<TKey, IEnumerable<TElement>, TResult> resultSelector,
+            IEqualityComparer<TKey> comparer)
+        {
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            if (keySelector == null)
+            {
+                throw new ArgumentNullException(nameof(keySelector));
+            }
+
+            if (elementSelector == null)
+            {
+                throw new ArgumentNullException(nameof(elementSelector));
+            }
+
+            if (resultSelector == null)
+            {
+                throw new ArgumentNullException(nameof(resultSelector));
+            }
+
+            var dictionary = new Dictionary<TKey, List<TElement>>(comparer);
+
+            foreach (var element in source)
+            {
+                var elementKey = keySelector(element);
+                var elements = elementSelector(element);
+            }
+        }
     }
 }
