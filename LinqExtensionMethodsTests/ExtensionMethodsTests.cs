@@ -349,5 +349,16 @@ namespace LinqExtensionMethodsTests_manual
 
             Assert.Equal(new[] { 2, 3, 4, 5, 7, 8, 9, 10 }, sortedCollection);
         }
+
+        [Fact]
+
+        public void ThenByMethodShouldReturnAnIOrderedEnumerableTElementWhoseElementsAreSortedAccordingToAKey()
+        {
+            int[] collection = new int[] { 3, 2, 5, 7, 9, 10, 8, 4 };
+            // sort odd numbers and then even numbers
+            var sortedCollection = collection.OrderBy(n => n % 2, Comparer<int>.Default).ThenBy(n => n, Comparer<int>.Default);
+
+            Assert.Equal(new[] { 2, 4, 8, 10, 3, 5, 7, 9 }, sortedCollection);
+        }
     }
 }
