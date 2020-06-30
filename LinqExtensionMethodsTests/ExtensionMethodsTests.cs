@@ -338,5 +338,16 @@ namespace LinqExtensionMethodsTests_manual
 
             Assert.Equal(new[] { "Costea Cristina, Costea Carla", "Socaci Micky, Socaci Tibi" }, groupFamily);
         }
+
+        [Fact]
+
+        public void OrderByMethodShouldReturnAnIOrderedEnumerableTElementWhoseElementsAreSortedAccordingToAKey()
+        {
+            int[] collection = new int[] { 3, 2, 5, 7, 9, 10, 8, 4};
+
+            var sortedCollection = collection.OrderBy(n => n, Comparer<int>.Default);
+
+            Assert.Equal(new[] { 2, 3, 4, 5, 7, 8, 9, 10 }, sortedCollection);
+        }
     }
 }
