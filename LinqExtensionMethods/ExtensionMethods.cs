@@ -341,7 +341,18 @@ namespace LinqExtensionMethods
             foreach (var element in source)
             {
                 var elementKey = keySelector(element);
-                var elements = elementSelector(element);
+                var newElement = elementSelector(element);
+                var elements = new List<TElement>() { newElement };
+
+                if (!dictionary.TryAdd(elementKey, elements))
+                {
+                    dictionary[elementKey].Add(newElement);
+                }
+            }
+
+            foreach (TKey key in dictionary.Keys)
+            {
+                yield return resultSelector(key, dictionary[key]);
             }
         }
     }

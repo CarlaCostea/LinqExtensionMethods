@@ -3526,9 +3526,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\LearningC#\\LinqExtensionMethods\\LinqExtensionMethodsTests\\LinqExtensionMethodsTests_manual.csproj",
-      "projectName": "LinqExtensionMethodsTests_manual",
-      "projectPath": "D:\\LearningC#\\LinqExtensionMethods\\LinqExtensionMethodsTests\\LinqExtensionMethodsTests_manual.csproj",
+      "projectUniqueName": "D:\\LearningC#\\LinqExtensionMethods\\LinqExtensionMethodsTests\\LinqExtensionMethodsTests.csproj",
+      "projectName": "LinqExtensionMethodsTests",
+      "projectPath": "D:\\LearningC#\\LinqExtensionMethods\\LinqExtensionMethodsTests\\LinqExtensionMethodsTests.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
       "outputPath": "D:\\LearningC#\\LinqExtensionMethods\\LinqExtensionMethodsTests\\obj\\",
       "projectStyle": "PackageReference",

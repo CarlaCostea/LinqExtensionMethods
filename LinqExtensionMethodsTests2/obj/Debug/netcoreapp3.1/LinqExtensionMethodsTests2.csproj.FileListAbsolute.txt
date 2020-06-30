@@ -1,2 +1,0 @@
-D:\LearningC#\LinqExtensionMethods\LinqExtensionMethodsTests2\obj\Debug\netcoreapp3.1\LinqExtensionMethodsTests2.AssemblyInfoInputs.cache
-D:\LearningC#\LinqExtensionMethods\LinqExtensionMethodsTests2\obj\Debug\netcoreapp3.1\LinqExtensionMethodsTests2.AssemblyInfo.cs

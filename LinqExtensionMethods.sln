@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinqExtensionMethods", "LinqExtensionMethods\LinqExtensionMethods.csproj", "{77BA1660-7E4F-40EF-89B2-70C0EBD7B611}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinqExtensionMethodsTests_manual", "LinqExtensionMethodsTests\LinqExtensionMethodsTests_manual.csproj", "{62C335FE-DFFB-4DCD-9501-DAEBC5A1CAD9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinqExtensionMethodsTests", "LinqExtensionMethodsTests\LinqExtensionMethodsTests.csproj", "{62C335FE-DFFB-4DCD-9501-DAEBC5A1CAD9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

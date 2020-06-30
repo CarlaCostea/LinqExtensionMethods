@@ -332,15 +332,11 @@ namespace LinqExtensionMethodsTests_manual
         [Fact]
         public void GroupByMethodShouldReturnACollectionOfElementsOfTypeTResultWhereEachElementRepresentsAProjectionOverAGroupAndItsKey()
         {
-            IList<string> strList1 = new List<string>() { "One", "Two", "Three", "Four", "One", "Two", "Five" };
+            string[] family = new string[] { "Costea Cristina", "Costea Carla", "Socaci Micky", "Socaci Tibi" };
 
-            IList<string> strList2 = new List<string>() { "One", "Two", "Six" };
+            var groupFamily = family.GroupBy(f => f.Split(' ').First(f => true), f => f, (current, enumerable) => string.Join(", ", enumerable), EqualityComparer<string>.Default);
 
-            var except = strList1.Except(strList2, EqualityComparer<string>.Default);
-
-            IList<string> result = new List<string>() { "Three", "Four", "Five" };
-
-            Assert.Equal(result, except);
+            Assert.Equal(new[] { "Costea Cristina, Costea Carla", "Socaci Micky, Socaci Tibi" }, groupFamily);
         }
     }
 }
